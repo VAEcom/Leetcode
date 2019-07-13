@@ -1,0 +1,33 @@
+//快慢指针
+/*关于快慢指针的结论:
+假设链表头结点到入环点距离为a，则在快慢指针相遇后，慢指针再走a步到达入环点，这里使用一个临时指针从开始节点走，当临时指针和慢指针相遇的时候，即为入环点。
+*/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode*fasptr,*sloptr,*temptr;
+        fasptr=head;
+        sloptr=head;
+        temptr=head;
+        while(fasptr!=NULL&&fasptr->next!=NULL){
+            fasptr=fasptr->next->next;
+            sloptr=sloptr->next;
+            if(fasptr!=NULL&&fasptr->next!=NULL&&fasptr==sloptr){
+                while(temptr!=sloptr){
+                    temptr=temptr->next;
+                    sloptr=sloptr->next;
+                }
+                return temptr;
+            }
+        }
+        return NULL;
+    }
+};
