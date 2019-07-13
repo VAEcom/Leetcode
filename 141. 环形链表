@@ -1,4 +1,4 @@
-//快慢指针
+//快慢指针法
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -18,6 +18,29 @@ public:
             if(fasptr!=NULL&&fasptr->next!=NULL&&fasptr->val==sloptr->val){
                 return true;
             }
+        }
+        return false;
+    }
+};
+//哈希表法
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        map<ListNode*,int>a;
+        while(head!=NULL){
+            if(a[head]>0){
+                return true;
+            }
+            a[head]++;
+            head=head->next;
         }
         return false;
     }
